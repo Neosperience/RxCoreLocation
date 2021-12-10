@@ -12,7 +12,7 @@ import PackageDescription
 let package = Package(
     name: "RxCoreLocation",
     defaultLocalization: "en",
-     platforms: [ .iOS(.v11)],
+    platforms: [ .iOS(.v11)],
     products: [
         .library(name: "RxCoreLocation", targets: ["RxCoreLocation"])
     ],
@@ -20,6 +20,11 @@ let package = Package(
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "5.1.1")
     ],
     targets: [
-        .target(name: "RxCoreLocation", dependencies: ["RxSwift", "RxCocoa"], path: "Sources")
+        .target(name: "RxCoreLocation",
+                dependencies: [
+                    .product(name: "RxSwift", package: "RxSwift"),
+                    .product(name: "RxCocoa", package: "RxSwift")
+                ],
+                path: "Sources")
     ]
 )
